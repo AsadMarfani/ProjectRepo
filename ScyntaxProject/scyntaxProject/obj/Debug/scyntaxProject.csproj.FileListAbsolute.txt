@@ -28,3 +28,6 @@ C:\Users\Asad\Desktop\scyntaxProject 17-03-2016\scyntaxProject\bin\Debug\scyntax
 C:\Users\Asad\Desktop\scyntaxProject 17-03-2016\scyntaxProject\bin\Debug\scyntaxProject.pdb
 C:\Users\Asad\Desktop\scyntaxProject 17-03-2016\scyntaxProject\obj\Debug\scyntaxProject.syntaxPad.resources
 C:\Users\Asad\Desktop\scyntaxProject 17-03-2016\scyntaxProject\obj\Debug\scyntaxProject.csproj.GenerateResource.Cache
+E:\Education\5th Semester\CompilerProject\PorjectRepo\scyntaxProject 20-03-2016\scyntaxProject\bin\Debug\scyntaxProject.exe.config
+E:\Education\5th Semester\CompilerProject\PorjectRepo\scyntaxProject 20-03-2016\scyntaxProject\obj\Debug\scyntaxProject.exe
+E:\Education\5th Semester\CompilerProject\PorjectRepo\scyntaxProject 20-03-2016\scyntaxProject\obj\Debug\scyntaxProject.pdb
