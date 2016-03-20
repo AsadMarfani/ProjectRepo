@@ -75,12 +75,13 @@
             // 
             // CodeTextBox
             // 
+            this.CodeTextBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CodeTextBox.Location = new System.Drawing.Point(12, 47);
             this.CodeTextBox.Multiline = true;
             this.CodeTextBox.Name = "CodeTextBox";
             this.CodeTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.CodeTextBox.Size = new System.Drawing.Size(536, 412);
-            this.CodeTextBox.TabIndex = 4;
+            this.CodeTextBox.TabIndex = 0;
             this.CodeTextBox.WordWrap = false;
             // 
             // syntaxPad
