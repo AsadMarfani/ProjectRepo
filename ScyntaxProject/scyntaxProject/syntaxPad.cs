@@ -14,12 +14,21 @@ namespace scyntaxProject
 {
     public partial class syntaxPad : Form
     {
+        string code, tempStr = null, viewTokens, remainCode;
+        string tokenFile = @"TokensFile.txt";
+        char[] codeCharArr;
+        char hold = '0', holdBreaker = '0';
+        string tempBreaker = null;
+        int count = 0, index;
+
+        string keywordFile = @"keywords List.txt";
+        string[] lines;
         char[] breakers;
         string[] keywords_ValuePart;
         string[] keywords_ClassPart;
-        char[] Arth_OP;
-        char[] Inc_Dec;
-        char[] Assignment;
+        string[] Arth_OP;
+        string[] Inc_Dec_OP;
+        string[] Assignment_OP;
         char[] Logical;
         char[] Relational;
         char[] Punctuators;
@@ -33,15 +42,16 @@ namespace scyntaxProject
         private void syntaxPad_Load(object sender, EventArgs e)
         {
             //Deleted '+','-' and '.' to check the RE of float_constant. We should build some logic for it.
-            breakers = new char[] { '*', '/', '%',';','=', '&', '|', '!', '<', '>', ':', ',', '?', '(', ')', '{', '}', '[', ']',' ','\r','\n',';'};
+            breakers = new char[] { '+','-','*', '/', '%',';','=', '&', '|', '!', '<', '>', ':', ',', '?', '(', ')', '{', '}', '[', ']',' ','\r','\n',';',' '};
             
-            Arth_OP=new char[]{'+','-','*','/'};
-            
+            Arth_OP = new string[]{"+","-","*","/","%"};
+            Inc_Dec_OP = new string[] { "++", "--" };
+            Assignment_OP = new string[] { "=", "+=", "-=", "*=", "/=" };
             // load the value part and class part of keywords in keyword_Array
             int i = 0;
-            string keywordFile = @"keywords List.txt";
             
-            string[] lines;
+            
+            
 
             lines = File.ReadAllLines(keywordFile);
             keywords_ValuePart = new string[lines.Length];
@@ -53,8 +63,7 @@ namespace scyntaxProject
                 int index = lines[i].IndexOf(",");
                 keywords_ValuePart[i] = lines[i].Substring(0, index);
                 keywords_ClassPart[i] = lines[i].Substring(index + 1); //Done! value part and class part of keywords      
-                i++;
-                
+                i++;                
             }
 
             File.WriteAllText(@"TokensFile.txt", String.Empty);
@@ -62,14 +71,10 @@ namespace scyntaxProject
 
         private void CompileButton_Click(object sender, EventArgs e)
         {
+            int count = 0;
             File.WriteAllText(@"TokensFile.txt", String.Empty);
-
             line_no = 1;
-            string code, tempStr=null, viewTokens,remainCode;
-            string tokenFile = @"TokensFile.txt";
-            char[] codeCharArr;
-            char hold= '0',holdBreaker='0';
-            int count = 0,index;
+            
 
             code = CodeTextBox.Text.ToString();
             codeCharArr = new char[code.Length];
@@ -86,10 +91,22 @@ namespace scyntaxProject
                         else if (codeCharArr[i] == breakers[j])
                         {
                             holdBreaker = codeCharArr[i];
-                            
+                            //if (count < 3 && (holdBreaker=='+'||holdBreaker=='-'||holdBreaker=='='||holdBreaker=='&'||holdBreaker=='|'))
+                            if (i + 1 != code.Length)
+                            {
+                                if (codeCharArr[i + 1] == '+' || codeCharArr[i + 1] == '-' || codeCharArr[i + 1] == '=' || codeCharArr[i + 1] == '&' || codeCharArr[i + 1] == '|')
+                                {
+                                    tempBreaker = holdBreaker.ToString() + codeCharArr[i + 1].ToString();
+                                    //count++;
+
+                                }
+                            }
                             break;
                         }
+
                     }
+                    Console.WriteLine(holdBreaker);
+                    Console.WriteLine(tempBreaker);
                     if (codeCharArr[i] == holdBreaker)
                     {
                         if (holdBreaker == '\n')
@@ -111,6 +128,14 @@ namespace scyntaxProject
                                         if (CharConst(tempStr) != true)
                                                 StrConst(tempStr);
                         }
+
+                        if (IncDec_Operator(tempBreaker) != true)
+                        {
+
+                            if (Arithmatic_Operator(holdBreaker.ToString()) != true)
+                            Assignment_Operator(tempBreaker);
+                        }
+                        tempBreaker = null;
                         tempStr = null;
                         i = -1;
                     }
@@ -168,7 +193,7 @@ namespace scyntaxProject
         // method for checking the tempstr is identifier/variable or not
         public bool IdentifierCheck(string CheckID) {
 
-          Match mID = Regex.Match(CheckID, @"^([a-zA-Z]|_)(\w*[a-zA-Z0-9])*$");
+            Match mID = Regex.Match(CheckID, @"^([a-zA-Z]|_)(\w*[a-zA-Z0-9])*$");
           if (mID.Success)
           {
               createToken("I.D", mID.Value, line_no);
@@ -233,19 +258,53 @@ namespace scyntaxProject
                 return false;
         }
 
-        public bool Arithmatic_Operator()
+        public bool Arithmatic_Operator(string checkOP)
         {
-            return true;
+            for(int i=0; i<Arth_OP.Length;i++)
+            {
+                if (checkOP == Arth_OP[i])
+                {
+                    createToken("A.S_Op", checkOP, line_no);
+
+                    //Console.WriteLine( + "\nString_Constant");
+
+                    return true;
+                 }
+            
+            }
+                return false;
+            
         }
 
-        public bool IncDec_Operator()
-        {
-            return true;
-        }
+        public bool IncDec_Operator(string incdec)
 
-        public bool Assignment_Operator()
         {
-            return true;
+            if (incdec == "++" || incdec == "--")
+            {
+                createToken("Inc_Dec", incdec, line_no);
+                return true;
+            }
+            else
+                return false;
+            }
+
+        public bool Assignment_Operator(string assign)
+        {
+            for (int i=0; i<Assignment_OP.Length; i++)
+            {
+                if (assign == "=")
+                {
+                    createToken("Assign_Op", assign, line_no);
+                    return true;
+                }
+                else if (assign == Assignment_OP[i])
+                {
+                    createToken("Assign_Equal_Op", assign, line_no);
+                    return true;  
+                }
+                
+            }
+            return false;
         }
 
         public bool Logical_Operator()
