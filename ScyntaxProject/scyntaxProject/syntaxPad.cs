@@ -17,7 +17,8 @@ namespace scyntaxProject
         string code, tempStr = null, viewTokens, remainCode;
         string tokenFile = @"TokensFile.txt";
         char[] codeCharArr;
-        char hold = '0', holdBreaker = '0';
+        char hold = '0';
+        char  holdBreaker = '0';
         string tempBreaker = null;
         int count = 0, index;
 
@@ -106,8 +107,8 @@ namespace scyntaxProject
 
                     }
                     Console.WriteLine(holdBreaker);
-                    Console.WriteLine(tempBreaker);
-                    if (codeCharArr[i] == holdBreaker)
+                 Console.WriteLine(tempBreaker);
+                    if (codeCharArr[i]== holdBreaker)
                     {
                         if (holdBreaker == '\n')
                         {
@@ -135,12 +136,14 @@ namespace scyntaxProject
                             if (Arithmatic_Operator(holdBreaker.ToString()) != true)
                             Assignment_Operator(tempBreaker);
                         }
+                        
                         tempBreaker = null;
                         tempStr = null;
                         i = -1;
                     }
                     else
                     {
+                        i++;
                         tempStr += hold;
                         count++;
                     }

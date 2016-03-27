@@ -39,3 +39,10 @@ C:\Users\junaid\Documents\Visual Studio 2012\Projects\ScyntaxCompilerProject\Scy
 C:\Users\junaid\Documents\Visual Studio 2012\Projects\ScyntaxCompilerProject\ScyntaxProject\scyntaxProject\obj\Debug\scyntaxProject.csprojResolveAssemblyReference.cache
 C:\Users\junaid\Documents\Visual Studio 2012\Projects\ScyntaxCompilerProject\ScyntaxProject\scyntaxProject\obj\Debug\scyntaxProject.syntaxPad.resources
 C:\Users\junaid\Documents\Visual Studio 2012\Projects\ScyntaxCompilerProject\ScyntaxProject\scyntaxProject\obj\Debug\scyntaxProject.csproj.GenerateResource.Cache
+E:\Education\5th Semester\CompilerProject\ProjectRepo\ScyntaxProject\scyntaxProject\bin\Debug\scyntaxProject.exe.config
+E:\Education\5th Semester\CompilerProject\ProjectRepo\ScyntaxProject\scyntaxProject\obj\Debug\scyntaxProject.exe
+E:\Education\5th Semester\CompilerProject\ProjectRepo\ScyntaxProject\scyntaxProject\obj\Debug\scyntaxProject.pdb
+E:\Education\5th Semester\CompilerProject\ProjectRepo\ScyntaxProject\scyntaxProject\bin\Debug\scyntaxProject.exe
+E:\Education\5th Semester\CompilerProject\ProjectRepo\ScyntaxProject\scyntaxProject\bin\Debug\scyntaxProject.pdb
+E:\Education\5th Semester\CompilerProject\ProjectRepo\ScyntaxProject\scyntaxProject\obj\Debug\scyntaxProject.syntaxPad.resources
+E:\Education\5th Semester\CompilerProject\ProjectRepo\ScyntaxProject\scyntaxProject\obj\Debug\scyntaxProject.csproj.GenerateResource.Cache
